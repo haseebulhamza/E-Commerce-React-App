@@ -48,7 +48,7 @@ function App() {
             <Navbar />
 
             <Routes>
-              <Route path="E-Commerce-React-App/" element={<Home />} />
+              <Route path="/E-Commerce-React-App" element={<Home />} />
               <Route path="/cart" element={<Cart className="bg-blue-300" />} />
               <Route path="*" element={<Error />} />
             </Routes>
