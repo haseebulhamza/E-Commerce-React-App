@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/E-Commerce-React-App/static/css/main.055d55f5.css",
+    "main.js": "/E-Commerce-React-App/static/js/main.ef1efb5d.js",
+    "index.html": "/E-Commerce-React-App/index.html",
+    "main.055d55f5.css.map": "/E-Commerce-React-App/static/css/main.055d55f5.css.map",
+    "main.ef1efb5d.js.map": "/E-Commerce-React-App/static/js/main.ef1efb5d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.055d55f5.css",
+    "static/js/main.ef1efb5d.js"
+  ]
+}
