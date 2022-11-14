@@ -62,7 +62,7 @@ export const Navbar = () => {
           />
         </svg>
 
-        <Link className="" to="E-Commerce-React-App/">
+        <Link className="" to="/E-Commerce-React-App">
           <p
             className={`${
               darkMode ? "text-white" : "text-black"
@@ -157,7 +157,7 @@ export const Navbar = () => {
         </div>
 
         <div className="flex-col text-center mb-16">
-          <Link className="" to="E-Commerce-React-App/">
+          <Link className="" to="/E-Commerce-React-App">
             <div
               onClick={() => {
                 setStyle("hidden");
