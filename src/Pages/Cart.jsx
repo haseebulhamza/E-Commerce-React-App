@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { AppContext } from "../App";
+import { useEffect } from "react";
 
 const Cart = () => {
   // State call
@@ -15,6 +16,11 @@ const Cart = () => {
     setTotalProducts,
     darkMode,
   } = useContext(AppContext);
+
+  // Setting title to Cart
+  useEffect(() => {
+    document.title = "LOGO | Cart";
+  }, []);
   // ******************************************
   //                Function deleteClick()
   // ******************************************
@@ -25,15 +31,8 @@ const Cart = () => {
         return cartItem !== copyCartItem;
       })
     );
-    // Set products
-    // setProducts(products.map((copyProduct)=>{
-    //   if(cartItem.id === copyProduct.id){
-    //     return{...copyProduct, state: "block", state2: "hidden"}
-    //   }else{
-    //     return {copyProduct}
-    //   }
-    // }))
-    // Set Total (later)
+
+    // Set Total
     setTotal(total - cartItem.price * cartItem.quantity);
     // set total products
     setTotalProducts(totalProducts - cartItem.quantity);
@@ -96,7 +95,7 @@ const Cart = () => {
   return (
     <div
       className={`absolute top-24 w-full 2xl:px-96 ${
-        darkMode ? "bg-gray-800" : "bg-blue-50"
+        darkMode ? "bg-gray-900" : "bg-blue-50"
       }`}
     >
       <div className="">
@@ -117,7 +116,13 @@ const Cart = () => {
             ${total < 0.0 ? 0.0 : total.toFixed(2)}
           </span>
         </h1>
-        <button className="bg-orange-600 w-64 h-11 mb-4 text-white font-bold ml-7 hover:bg-orange-500">
+        <button
+          className={`${
+            darkMode ? "bg-indigo-600" : "bg-indigo-500"
+          } w-64 h-11 mb-4 text-white font-bold ml-7 ${
+            darkMode ? "hover:bg-indigo-500" : "hover:bg-indigo-400"
+          }`}
+        >
           Proceed to Checkout
         </button>
       </div>
@@ -141,7 +146,7 @@ const Cart = () => {
         {/* TAGS DIV  */}
         <div
           className={`invisible sm:visible flex justify-between bg-gray-200 px-24 py-3 border-gray-400 border-b-2
-        ${darkMode ? "bg-indigo-600" : "bg-indigo-600"}`}
+        ${darkMode ? "bg-indigo-800" : "bg-indigo-300"}`}
         >
           <div>
             <p
@@ -193,7 +198,11 @@ const Cart = () => {
                     {cartItem.title}
                   </p>
                   {/* Product Price  */}
-                  <p className={`text-lg mb-1 text-green-600`}>
+                  <p
+                    className={`text-lg mb-1 ${
+                      darkMode ? "text-green-400" : "text-green-600"
+                    }`}
+                  >
                     ${cartItem.price}
                   </p>
 
@@ -201,15 +210,25 @@ const Cart = () => {
                   <div className="flex gap-2 mb-4">
                     {/* Plus Button  */}
                     <button
-                      className="bg-indigo-400 w-6"
+                      className={`${
+                        darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                      } w-6 text-white font-semibold`}
                       onClick={() => plusClick(cartItem)}
                     >
                       +
                     </button>
-                    <div className="text-sm">{cartItem.quantity}</div>
+                    <div
+                      className={`text-sm ${
+                        darkMode ? "text-white" : "text-black"
+                      } font-semibold`}
+                    >
+                      {cartItem.quantity}
+                    </div>
                     {/* Minus Button  */}
                     <button
-                      className="bg-slate-300 w-6"
+                      className={`${
+                        darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                      } w-6 text-white font-semibold`}
                       onClick={() => minusClick(cartItem)}
                     >
                       -
@@ -219,7 +238,9 @@ const Cart = () => {
 
                   {/* DELETE BUTTON  */}
                   <button
-                    className="text-sm bg-orange-600 text-white  font-bold w-36 h-9 rounded hover:bg-orange-500"
+                    className={`text-sm ${
+                      darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                    } text-white  font-bold w-36 h-9 rounded`}
                     onClick={() => deleteClick(cartItem)}
                   >
                     Delete Item
@@ -252,7 +273,14 @@ const Cart = () => {
                     <div className="flex gap-2 mb-4">
                       {/* Plus Button  */}
                       <button
-                        className="bg-indigo-600 text-white w-6"
+                        className={`${
+                          darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                        } text-white w-6
+                        ${
+                          darkMode
+                            ? "hover:bg-indigo-500"
+                            : "hover:bg-indigo-400"
+                        } font-bold`}
                         onClick={() => plusClick(cartItem)}
                       >
                         +
@@ -260,13 +288,20 @@ const Cart = () => {
                       <div
                         className={`${
                           darkMode ? "text-white" : "text-black"
-                        } text-sm`}
+                        } text-sm font-bold`}
                       >
                         {cartItem.quantity}
                       </div>
                       {/* Minus Button  */}
                       <button
-                        className="bg-indigo-600 text-white w-6"
+                        className={`${
+                          darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                        } text-white w-6
+                        ${
+                          darkMode
+                            ? "hover:bg-indigo-500"
+                            : "hover:bg-indigo-400"
+                        } font-bold`}
                         onClick={() => minusClick(cartItem)}
                       >
                         -

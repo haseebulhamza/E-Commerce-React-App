@@ -1,5 +1,5 @@
 import React from "react";
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AppContext } from "../App";
 import { useEffect } from "react";
@@ -17,16 +17,12 @@ const Home = () => {
     totalProducts,
     setTotalProducts,
     darkMode,
-    setDarkMode,
   } = useContext(AppContext);
 
-  // useEffect(() => {
-  //   const prods = JSON.parse(localStorage.getItem("products"));
-  //   setProducts(prods);
-  // }, []);
+  // Setting title to Home
   useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  }, [products]);
+    document.title = "LOGO | Home";
+  }, []);
 
   // ******************************************
   //                Function addClick()
@@ -35,7 +31,6 @@ const Home = () => {
     setCart([
       ...cart,
       {
-        // id: cart.length > 0 ? cart[cart.length - 1].id + 1 : 1,
         id: product.id,
         title: product.title,
         price: product.price,
@@ -44,8 +39,6 @@ const Home = () => {
         quantity: 1,
       },
     ]);
-
-    // console.log(products);
     // Set Total
     setTotal(total + product.price);
     // set total Products in Cart
@@ -62,14 +55,11 @@ const Home = () => {
     );
   };
 
+  // ******************************************
+  //                Function fetchProducts
+  // ******************************************
   const fetchProducts = async () => {
     const response = await axios.get("https://fakestoreapi.com/products");
-    if (products.length <= 0) {
-      setProducts(response.data);
-    } else {
-      setProducts(products);
-    }
-
     return response.data;
   };
 
@@ -86,13 +76,18 @@ const Home = () => {
     return <h1>Error! {error.message}</h1>;
   }
 
-  // console.log(products);
+  // Setting Data to products
+  if (products.length <= 0) {
+    setProducts(data);
+  } else {
+    setProducts(products);
+  }
 
   return (
     // PRODUCTSSS DIV
     <div
       className={`absolute top-14 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6
-    ${darkMode ? "bg-gray-800" : "bg-blue-50"}`}
+    ${darkMode ? "bg-gray-900" : "bg-blue-50"}`}
     >
       {/* PRODUCT DIV  */}
       {products.map((product) => {
@@ -124,8 +119,12 @@ const Home = () => {
               </h1>
               {/* PRODUCT PRICE  */}
               <h1
-                className="text-sm mb-1 text-green-600
-              sm:text-xs sm:font-bold sm:text-green-700 sm:mb-1"
+                className={`text-sm mb-1 ${
+                  darkMode ? "text-green-400" : "text-green-600"
+                }
+                sm:text-xs sm:font-bold ${
+                  darkMode ? "sm:text-green-400" : "sm:text-green-600"
+                } sm:mb-1`}
               >
                 ${product.price}
               </h1>
@@ -134,7 +133,11 @@ const Home = () => {
 
               {/* ADD TO CART BUTTON  */}
               <button
-                className={`text-sm bg-orange-600 text-white  font-bold w-36 sm:w-4/6 md:w-4/6 lg:w-4/6 xl:w-4/6 h-9 rounded hover:bg-orange-500
+                className={`text-sm ${
+                  darkMode ? "bg-indigo-600" : "bg-indigo-500"
+                } text-white  font-bold w-36 sm:w-4/6 md:w-4/6 lg:w-4/6 xl:w-4/6 h-9 rounded ${
+                  darkMode ? "hover:bg-indigo-500" : "hover:bg-indigo-400"
+                }
               block ${product.added ? "hidden" : "block"}`}
                 onClick={() => addClick(product)}
               >
@@ -142,9 +145,9 @@ const Home = () => {
               </button>
 
               <div
-                className={`text-green-700 font-semibold ${
-                  product.added ? "block" : "hidden"
-                }`}
+                className={`${
+                  darkMode ? "text-green-400" : "text-green-600"
+                } font-semibold ${product.added ? "block" : "hidden"}`}
               >
                 Item Added to Cart
               </div>
